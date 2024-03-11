@@ -136,8 +136,8 @@ class build_ext_subclass(build_ext):
             # If configure detected bzlib.h, we have to link to libbz2
             with open(os.path.join(self.cfitsio_build_dir, 'Makefile')) as fp:
                 _makefile = fp.read()
-                if '-DHAVE_BZIP2=1' in _makefile:
-                    self.compiler.add_library('bz2')
+                # if '-DHAVE_BZIP2=1' in _makefile:
+                #     self.compiler.add_library('bz2')
                 if '-DCFITSIO_HAVE_CURL=1' in _makefile:
                     self.compiler.add_library('curl')
 
@@ -160,8 +160,8 @@ class build_ext_subclass(build_ext):
             self.compiler.add_library('cfitsio')
 
             # Check if system cfitsio was compiled with bzip2 and/or curl
-            if self.check_system_cfitsio_objects('bzip2'):
-                self.compiler.add_library('bz2')
+            # if self.check_system_cfitsio_objects('bzip2'):
+            #     self.compiler.add_library('bz2')
             if self.check_system_cfitsio_objects('curl_'):
                 self.compiler.add_library('curl')
 
@@ -246,10 +246,10 @@ class build_ext_subclass(build_ext):
 
         args = ''
 
-        if "FITSIO_BZIP2_DIR" in os.environ:
-            args += ' --with-bzip2="%s"' % os.environ["FITSIO_BZIP2_DIR"]
-        else:
-            args += ' --with-bzip2'
+        # if "FITSIO_BZIP2_DIR" in os.environ:
+        #     args += ' --with-bzip2="%s"' % os.environ["FITSIO_BZIP2_DIR"]
+        # else:
+        #     args += ' --with-bzip2'
 
         if CC is not None:
             args += ' CC="%s"' % ' '.join(CC[:1])
